@@ -1,12 +1,13 @@
 const { getAllProducts, getProductsById } = require('../services/products');
 const { SUCESS } = require('../statusCode');
 
-const listProducts = async (_req, res, _next) => {
+const listProducts = async (_req, res, next) => {
     try {
         const products = await getAllProducts();
         return res.status(SUCESS).json(products);
     } catch (err) {
         console.log('error list products:', err.message);
+        next(err);
     }
 };
 
