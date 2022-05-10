@@ -1,5 +1,5 @@
 const { getAllProducts, getProductsById, registerProduct } = require('../services/products');
-const { SUCESS } = require('../statusCode');
+const { SUCESS, CREATED } = require('../statusCode');
 
 const listProducts = async (_req, res, next) => {
     try {
@@ -25,7 +25,7 @@ const productsById = async (req, res, next) => {
 const createNewProduct = async (req, res, next) => {
     try {
         const newProduct = await registerProduct(req.body);
-        return res.status(SUCESS).json(newProduct);
+        return res.status(CREATED).json(newProduct);
     } catch (err) {
         console.log('error create new product:', err.message);
         next(err);
