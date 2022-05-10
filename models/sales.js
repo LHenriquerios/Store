@@ -5,7 +5,6 @@ const allSales = async () => {
     WHERE sales.id = sales_products.sale_id 
     ORDER BY sales_products.sale_id, sales_products.product_id;`;
     const [data] = await connection.execute(query);
-    console.log(data);
     const result = data.map((e) => ({
     saleId: e.sale_id,
     date: e.date,
