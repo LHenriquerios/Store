@@ -8,7 +8,6 @@ const getAllSales = async () => {
 
 const getSalesById = async (id) => {
     const sale = await salesById(id);
-    console.log(sale);
     if (sale.length === 0) {
         const err = { status: NOT_FOUND, message: 'Sale not found' };
         throw err;
