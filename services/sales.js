@@ -32,9 +32,15 @@ const editSale = async (sale) => {
     return editedSale;
 };
 
+const deleteSale = async (id) => {
+    await getSalesById(id);
+    await modelSales.deleteSale(id);
+};
+
 module.exports = {
     getAllSales,
     getSalesById,
     createSale,
     editSale,
+    deleteSale,
 };
