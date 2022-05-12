@@ -21,7 +21,7 @@ const createSale = async (sale) => {
         modelSales.createSaleProduct(id, productId, quantity)));
     return {
         id,
-        itemSold: sales,
+        itemsSold: sales,
     };
 };
 
