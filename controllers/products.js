@@ -23,13 +23,13 @@ const editProduct = async (req, res) => {
         let obj = req.body;
         obj = { id, ...obj };
         const editedProduct = await service.updateProduct(obj);
-        res.status(SUCESS).json(editedProduct);
+        return res.status(SUCESS).json(editedProduct);
 };
 
 const deleteProduct = async (req, res) => {
         const { id } = req.params;
         await service.deleteProduct(id);
-        res.status(NO_CONTENT).json();
+        return res.status(NO_CONTENT).json();
 };
 
 module.exports = {

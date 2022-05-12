@@ -10,5 +10,6 @@ const salesRouter = express.Router();
 salesRouter.get('/', rescue(saleController.listSales));
 salesRouter.get('/:id', rescue(saleController.salesById));
 salesRouter.post('/', validateBody(validateSale), rescue(saleController.createSale));
+salesRouter.put('/:id', validateBody(validateSale), rescue(saleController.editSale));
 
 module.exports = salesRouter;

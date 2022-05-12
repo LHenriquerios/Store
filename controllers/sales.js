@@ -9,7 +9,7 @@ const listSales = async (_req, res) => {
 const salesById = async (req, res) => {
         const { id } = req.params;
         const sale = await service.getSalesById(id);
-        res.status(SUCESS).json(sale);
+        return res.status(SUCESS).json(sale);
 };
 
 const createSale = async (req, res) => {
@@ -17,8 +17,17 @@ const createSale = async (req, res) => {
         return res.status(CREATED).json(newSale);
 };
 
+const editSale = async (req, res) => {
+    const { id } = req.params;
+    let [obj] = req.body;
+    obj = { id, ...obj };
+    const editedSale = await service.editSale(obj);
+    return res.status(SUCESS).json(editedSale);
+};
+
 module.exports = {
     listSales,
     salesById,
     createSale,
+    editSale,
 };

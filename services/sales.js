@@ -25,8 +25,16 @@ const createSale = async (sale) => {
     };
 };
 
+const editSale = async (sale) => {
+    const { id, productId, quantity } = sale;
+    const editedSale = await modelSales.editSale(id, productId, quantity);
+    console.log(editedSale);
+    return editedSale;
+};
+
 module.exports = {
     getAllSales,
     getSalesById,
     createSale,
+    editSale,
 };
