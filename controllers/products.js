@@ -1,59 +1,35 @@
 const service = require('../services/products');
-const { SUCESS, CREATED } = require('../statusCode');
+const { SUCESS, NO_CONTENT, CREATED } = require('../statusCode');
 
-const listProducts = async (_req, res, next) => {
-    try {
+const listProducts = async (_req, res) => {
         const products = await service.getAllProducts();
         return res.status(SUCESS).json(products);
-    } catch (err) {
-        console.log('error list products:', err.message);
-        next(err);
-    }
 };
 
-const productsById = async (req, res, next) => {
-    try {
+const productsById = async (req, res) => {
         const { id } = req.params;
         const product = await service.getProductsById(id);
         return res.status(SUCESS).json(product);
-    } catch (err) {
-        console.log('error product id:', err.message);
-        next(err);
-    }
 };
 
-const createNewProduct = async (req, res, next) => {
-    try {
+const createNewProduct = async (req, res) => {
         const newProduct = await service.registerProduct(req.body);
+        console.log(newProduct);
         return res.status(CREATED).json(newProduct);
-    } catch (err) {
-        console.log('error create new product:', err.message);
-        next(err);
-    }
 };
 
-const editProduct = async (req, res, next) => {
-    try {
+const editProduct = async (req, res) => {
         const { id } = req.params;
         let obj = req.body;
         obj = { id, ...obj };
         const editedProduct = await service.updateProduct(obj);
         res.status(SUCESS).json(editedProduct);
-    } catch (err) {
-        console.log('error edit product:', err.message);
-        next(err);
-    }
 };
 
-const deleteProduct = async (req, res, next) => {
-    try {
+const deleteProduct = async (req, res) => {
         const { id } = req.params;
         await service.deleteProduct(id);
-        res.status(SUCESS).json();
-    } catch (err) {
-        console.log('error delete product:', err.message);
-        next(err);
-    }
+        res.status(NO_CONTENT).json();
 };
 
 module.exports = {

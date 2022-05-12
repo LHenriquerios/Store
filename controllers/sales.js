@@ -1,28 +1,24 @@
-const { getAllSales, getSalesById } = require('../services/sales');
-const { SUCESS } = require('../statusCode');
+const service = require('../services/sales');
+const { SUCESS, CREATED } = require('../statusCode');
 
-const listSales = async (_req, res, next) => {
-    try {
-        const sales = await getAllSales();
+const listSales = async (_req, res) => {
+        const sales = await service.getAllSales();
         return res.status(SUCESS).json(sales);
-    } catch (err) {
-        console.log('error list sales:', err.message);
-        next(err);
-    }
 };
 
-const salesById = async (req, res, next) => {
-    try {
+const salesById = async (req, res) => {
         const { id } = req.params;
-        const sale = await getSalesById(id);
+        const sale = await service.getSalesById(id);
         res.status(SUCESS).json(sale);
-    } catch (err) {
-        console.log('error sale id:', err.message);
-        next(err);
-    }
+};
+
+const createSale = async (req, res) => {
+        const newSale = await service.createSale([req.body]);
+        return res.status(CREATED).json(newSale);
 };
 
 module.exports = {
     listSales,
     salesById,
+    createSale,
 };
