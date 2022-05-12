@@ -13,7 +13,7 @@ const salesById = async (req, res) => {
 };
 
 const createSale = async (req, res) => {
-        const newSale = await service.createSale([req.body]);
+        const newSale = await service.createSale(req.body);
         return res.status(CREATED).json(newSale);
 };
 
