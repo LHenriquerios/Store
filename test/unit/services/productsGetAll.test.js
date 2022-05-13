@@ -4,7 +4,7 @@ const { expect } = require('chai');
 
 const sinon = require('sinon');
 
-describe('Busca todos os produtos no BD', () => {
+describe('Chamada da camada Service', () => {
     describe('quando não existem produtos no BD', () => {
         const resultExecute = [];
 
