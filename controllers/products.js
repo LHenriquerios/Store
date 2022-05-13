@@ -14,7 +14,6 @@ const productsById = async (req, res) => {
 
 const createNewProduct = async (req, res) => {
         const newProduct = await service.registerProduct(req.body);
-        console.log(newProduct);
         return res.status(CREATED).json(newProduct);
 };
 
