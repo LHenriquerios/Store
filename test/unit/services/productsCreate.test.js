@@ -13,13 +13,15 @@ describe('Chamada na camada Service no Create', () => {
       ;
     
         beforeEach(() => {
-          const ID_EXAMPLE = 1;
+          const ID_EXAMPLE = 40;
     
           sinon.stub(productModel, 'createProduct').resolves({ id: ID_EXAMPLE });
+          sinon.stub(productModel, 'allProducts').resolves([]);
         });
     
         afterEach(() => {
           productModel.createProduct.restore();
+          productModel.allProducts.restore();
         });
     
         it("retorna um objeto", async () => {
