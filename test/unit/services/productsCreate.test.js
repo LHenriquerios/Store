@@ -12,13 +12,13 @@ describe('Chamada na camada Service no Create', () => {
           }
       ;
     
-        before(() => {
+        beforeEach(() => {
           const ID_EXAMPLE = 1;
     
           sinon.stub(productModel, 'createProduct').resolves({ id: ID_EXAMPLE });
         });
     
-        after(() => {
+        afterEach(() => {
           productModel.createProduct.restore();
         });
     
