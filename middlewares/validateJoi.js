@@ -1,7 +1,15 @@
 const { BAD_REQUEST, UNPROCESSABLE_ENTITY } = require('../statusCode');
 
-module.exports = (schemas) => (req, _res, next) => {
-    const { error } = schemas.validate(req.body);
+const validadeArray = (body) => {
+    if (body === Array.isArray()) return body;
+    const newBody = [body];
+    return newBody;
+};
+
+const validateJoi = (schemas) => (req, _res, next) => {
+    const bodyArray = validadeArray(req.body);
+    bodyArray.forEach((element) => {
+    const { error } = schemas.validate(element);
 
     if (error) {
     switch (error.details[0].type) {
@@ -15,8 +23,9 @@ module.exports = (schemas) => (req, _res, next) => {
             next({ status: UNPROCESSABLE_ENTITY, message: error.details[0].message });
             break;
         default:
-            console.log(error.details[0].message);
     }
 }
-    next();
+}); next();
 };
+
+module.exports = validateJoi;
